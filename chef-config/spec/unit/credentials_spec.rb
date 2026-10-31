@@ -86,7 +86,7 @@ RSpec.describe ChefConfig::Mixin::Credentials do
 
   describe "#valid_secrets_provider?" do
     context "when global, valid configuration was provided" do
-      let(:global_options) { { "default_secrets_provider" => { "name" => "hashicorp-vault", "endpoint" => "https://198.51.100.5:8200", "token" => "hvs.1234567890" } } }
+      let(:global_options) { { "default_secrets_provider" => { "name" => "hashicorp-vault", "endpoint" => "https://198.51.100.5:8200", "token" => "vault-test-token" } } }
       let(:secrets_config) { { "secret" => "/chef/sudo_password", "field" => "password" } }
 
       it "returns true" do
@@ -148,7 +148,7 @@ RSpec.describe ChefConfig::Mixin::Credentials do
 
       context "for a secret of type hash" do
         let(:secrets_result) { { "password" => "secret" } }
-        let(:secrets_config) { { "secrets_provider" => { "name" => "hashicorp-vault", "endpoint" => "https://198.51.100.5:8200", "token" => "hvs.1234567890" }, "secret" => "/chef/sudo_password", "field" => "password" } }
+        let(:secrets_config) { { "secrets_provider" => { "name" => "hashicorp-vault", "endpoint" => "https://198.51.100.5:8200", "token" => "vault-test-token" }, "secret" => "/chef/sudo_password", "field" => "password" } }
 
         it "returns the correct subkey" do
           expect(test_obj.resolve_secret(secrets_config)).to eq("secret")
@@ -157,7 +157,7 @@ RSpec.describe ChefConfig::Mixin::Credentials do
     end
 
     context "with default secrets provider being set" do
-      let(:global_options) { { "default_secrets_provider" => { "name" => "hashicorp-vault", "endpoint" => "https://198.51.100.5:8200", "token" => "hvs.1234567890" } } }
+      let(:global_options) { { "default_secrets_provider" => { "name" => "hashicorp-vault", "endpoint" => "https://198.51.100.5:8200", "token" => "vault-test-token" } } }
 
       context "for a secret of type string" do
         let(:secrets_result) { "secret" }
